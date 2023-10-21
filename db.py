@@ -49,3 +49,8 @@ async def drop_all_and_create_all():
 
 async def dispose():
     await engine.dispose()
+
+async def add_starwarsperson(person_db_data: dict):
+    async with Session() as db_session:
+        db_session.add(StarWarsPerson(**person_db_data))
+        await db_session.commit()

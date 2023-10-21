@@ -112,14 +112,9 @@ async def insert_person(db_init_task: asyncio.Task, person: dict) -> None:
     person_db_data['vehicles'] = await get_person_vehicles_task
 
     await db_init_task
-
-    async with db.Session() as db_session:
-        db_session.add(db.StarWarsPerson(**person_db_data))
-        await db_session.commit()
-
+    await db.add_starwarsperson(person_db_data)
     global db_count
     db_count += 1
-
     print(f'Добавление в БД №{db_count}:'
           f' id_{person_db_data["id"]} {person_db_data["name"]}')
 
