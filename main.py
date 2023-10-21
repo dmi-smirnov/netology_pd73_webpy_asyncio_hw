@@ -12,7 +12,7 @@ async def get_people_list(URL: str):
     while url:
         async with aiohttp.ClientSession() as aiohttp_session:
             resp = await aiohttp_session.get(url)
-        json_data =  await resp.json()
+            json_data =  await resp.json()
         if isinstance(json_data, dict):
             url = json_data.get('next')
             results = json_data.get('results')
@@ -52,7 +52,7 @@ def async_cached(old_func):
 async def aiohttp_get_json(url: str):
     async with aiohttp.ClientSession() as aiohttp_session:
         resp = await aiohttp_session.get(url)
-    return await resp.json()
+        return await resp.json()
 
 async def get_concat_values(urls: list[str], value_name: str):
     if not urls:
@@ -134,7 +134,7 @@ async def main():
     async for people_list in get_people_list(GET_PEOPLE_URL):
         global api_count
         
-        print(f'Получены по API {api_count} + {len(people_list)}):',
+        print(f'Получены по API ({api_count} + {len(people_list)}):',
               end='\n  ')
         print('\n  '.join([p['name'] for p in people_list]))
         
