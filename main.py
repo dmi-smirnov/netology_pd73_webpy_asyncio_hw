@@ -145,6 +145,8 @@ async def main():
     while len(asyncio.all_tasks()) > 1:
         active_tasks = asyncio.all_tasks() - {asyncio.current_task()}
         await asyncio.gather(*active_tasks)
+    
+    await db.dispose()
 
 
 if __name__ == '__main__':

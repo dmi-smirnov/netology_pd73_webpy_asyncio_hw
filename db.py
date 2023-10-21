@@ -46,3 +46,6 @@ async def drop_all_and_create_all():
     async with engine.begin() as conn:
         await conn.run_sync(BaseClass.metadata.drop_all)
         await conn.run_sync(BaseClass.metadata.create_all)
+
+async def dispose():
+    await engine.dispose()
